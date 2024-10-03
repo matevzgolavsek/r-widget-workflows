@@ -38,6 +38,12 @@ jobs:
         run: |
           mkdir -p release
           zip -r release/relay-widget-build.zip ./dist
+      
+      - name: Get latest tag
+        id: get_tag
+        run: |
+          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+          echo "latest_tag=$latest_tag" >> $GITHUB_ENV
 
       # Step 7: Create a GitHub release
       - name: Create GitHub Release
@@ -46,7 +52,10 @@ jobs:
         with:
           tag_name: ${{ github.ref_name }}
           name: "Release ${{ github.ref_name }}"
-          fail_on_unmatched_files: true
+          fail_on_unmatched_files: true,
+          body: |
+            ## What's Changed
+            **Full Changelog:** [${{ steps.get_tag.outputs.latest_tag }}..${{ github.ref_name }}](https://github.com/${{ github.repository }}/compare/${{ steps.get_tag.outputs.latest_tag }}...${{ github.ref_name }})
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
