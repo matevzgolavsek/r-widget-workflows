@@ -42,7 +42,7 @@ jobs:
       - name: Get previous tag
         id: get_previous_tag
         run: |
-          current_tag=${{ github.ref_name }}
+          current_tag=${GITHUB_REF#refs/tags/}
           previous_tag=$(git tag --sort=-creatordate | grep -v "^$current_tag$" | head -n 1)
           echo "previous_tag=$previous_tag" >> $GITHUB_OUTPUT
 
