@@ -42,7 +42,7 @@ jobs:
       - name: Get previous tag
         id: get_previous_tag
         run: |
-          FOUND_TAG=$(git tag -l sort -V --reverse | sed -n 2p)
+          FOUND_TAG=$(git tag -l | sort -V --reverse | sed -n 2p)
           echo "previous_tag=$(echo "${FOUND_TAG}")" >> $GITHUB_OUTPUT
 
       # Step 7: Create a GitHub release
