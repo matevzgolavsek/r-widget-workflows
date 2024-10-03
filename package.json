@@ -1,0 +1,55 @@
+{
+  "name": "relay-flow-widget",
+  "version": "1.0.0",
+  "description": "Relay flow widget build with esbuild",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf ./build",
+    "prepare-build": "pnpm clean",
+    "bundle": "pnpm prepare-build && node ./esbuild.config.js",
+    "build": "pnpm prepare-build && NODE_ENV=production pnpm bundle",
+    "start": "NODE_ENV=development pnpm bundle",
+    "lint:fix": "eslint --fix ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/relay-commerce/flow.git"
+  },
+  "keywords": [
+    "esbuild",
+    "bundler",
+    "build",
+    "eslint"
+  ],
+  "author": "Matevz Golavsek",
+  "license": "MIT",
+  "homepage": "https://github.com/relay-commerce/flow#readme",
+  "devDependencies": {
+    "@babel/core": "^7.24.6",
+    "@babel/preset-env": "^7.24.6",
+    "autoprefixer": "^10.4.19",
+    "esbuild": "^0.21.4",
+    "esbuild-plugin-babel": "^0.2.3",
+    "esbuild-plugin-eslint": "^0.3.12",
+    "esbuild-postcss": "^0.0.4",
+    "eslint": "^9.3.0",
+    "postcss": "^8.4.38",
+    "prettier": "^3.3.3"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 12,
+      "sourceType": "module"
+    },
+    "rules": {
+      "no-console": "off"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relay Widget</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+</head>
+
+<body>
+  <script src="index.js"></script>
+  <script>
+    var WIDGET_PUBLIC_ID = 'g8Jps7X2ouhFpBMI-1-64208ec';
+    var BACKEND_ENDPOINT = 'http://0.0.0.0:9292';
+    (function (pub_id, endpoint) {
+      window.RelayWidget ? window.RelayWidget.init(pub_id, endpoint) : console.error('Relay Widget initialization failed:\nRequired script not loaded. Ensure the Relay Widget script is included before initializing the widget.');
+    })(WIDGET_PUBLIC_ID, BACKEND_ENDPOINT);
+  </script>
+</body>
+
+</html>
