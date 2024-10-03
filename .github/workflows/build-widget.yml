@@ -43,8 +43,7 @@ jobs:
         id: get_previous_tag
         run: |
           previous_tag=$(git describe --tags `git rev-list --tags --skip=1 --max-count=1`)
-          echo "::set-output name=previous_tag::$previous_tag"
-        shell: bash
+          echo "{previous_tag}={previous_tag}" >> $GITHUB_OUTPUT
 
       # Step 7: Create a GitHub release
       - name: Create GitHub Release
