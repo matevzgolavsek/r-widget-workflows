@@ -43,7 +43,7 @@ jobs:
         id: get_previous_tag
         run: |
           git fetch -a
-          previous_tag=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))
+          previous_tag=$(git describe --abbrev=0 --tags --exclude="$(git describe --abbrev=0 --tags)")
           echo "previous_tag=$previous_tag" >> $GITHUB_OUTPUT
 
       # Step 7: Create a GitHub release
