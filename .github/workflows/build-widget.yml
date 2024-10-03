@@ -44,6 +44,7 @@ jobs:
         run: |
           FOUND_TAG=$(git tag -l "v*" | sort -V --reverse | sed -n 2p)
           echo "previous_tag=$(echo "${FOUND_TAG}")" >> $GITHUB_OUTPUT
+          [[ -z $(echo "$FOUND_TAG") ]] && echo "No tag found..." || echo "Tag found: ${FOUND_TAG}"
 
       # Step 7: Create a GitHub release
       - name: Create GitHub Release
