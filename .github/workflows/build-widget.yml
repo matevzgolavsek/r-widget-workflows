@@ -37,7 +37,7 @@ jobs:
       - name: Create zip file
         run: |
           mkdir -p release
-          zip -r release/relay-widget-build.zip ./dist
+          zip -r release/relay-widget-build-${{ github.ref_name }}.zip ./dist
       
       - name: Get previous tag
         id: get_previous_tag
@@ -64,7 +64,6 @@ jobs:
       - name: Upload artifact to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          name: widget-latest.js
-          files: dist/widget.js
+          files: release/relay-widget-build-${{ github.ref_name }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
