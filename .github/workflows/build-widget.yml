@@ -48,7 +48,7 @@ jobs:
           echo "Listing done."
 
           # Get the sorted tags and capture the second latest one
-          FOUND_TAG=$(git tag -l | sort -V --reverse | sed -n 2p)
+          FOUND_TAG=$(git ls-remote --tags --ref --sort='version:refname' | tail -n 2 | head -n 1 | awk -F/ '{print $NF}')
 
           # Debug output to check if a tag was found
           if [[ -z "$FOUND_TAG" ]]; then
