@@ -42,9 +42,23 @@ jobs:
       - name: Get previous tag
         id: get_previous_tag
         run: |
-          FOUND_TAG=$(git tag -l "v*" | sort -V --reverse | sed -n 2p)
-          echo "previous_tag=$(echo "${FOUND_TAG}")" >> $GITHUB_OUTPUT
-          [[ -z $(echo "$FOUND_TAG") ]] && echo "No tag found..." || echo "Tag found: ${FOUND_TAG}"
+          # List all tags, sort them in reverse version order, and get the second latest
+          echo "Listing all tags..."
+          git tag -l
+          echo "Listing done."
+
+          # Get the sorted tags and capture the second latest one
+          FOUND_TAG=$(git tag -l | sort -V --reverse | sed -n 2p)
+
+          # Debug output to check if a tag was found
+          if [[ -z "$FOUND_TAG" ]]; then
+            echo "No previous tag found."
+          else
+            echo "Previous tag found: ${FOUND_TAG}"
+          fi
+
+          # Set the previous tag as an output if found
+          echo "previous_tag=$FOUND_TAG" >> $GITHUB_OUTPUT
 
       # Step 7: Create a GitHub release
       - name: Create GitHub Release
