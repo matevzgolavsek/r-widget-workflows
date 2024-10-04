@@ -39,26 +39,9 @@ jobs:
           mkdir -p release
           zip -r release/relay-widget-build.zip ./dist
       
-      - name: Get previous tag
+      - name: 'Get Previous tag'
         id: get_previous_tag
-        run: |
-          # List all tags, sort them in reverse version order, and get the second latest
-          echo "Listing all tags..."
-          git tag -l
-          echo "Listing done."
-
-          # Get the sorted tags and capture the second latest one
-          FOUND_TAG=$(git tag -l | sort -V --reverse | sed -n 2p)
-
-          # Debug output to check if a tag was found
-          if [[ -z "$FOUND_TAG" ]]; then
-            echo "No previous tag found."
-          else
-            echo "Previous tag found: ${FOUND_TAG}"
-          fi
-
-          # Set the previous tag as an output if found
-          echo "previous_tag=$FOUND_TAG" >> $GITHUB_OUTPUT
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
 
       # Step 7: Create a GitHub release
       - name: Create GitHub Release
@@ -70,7 +53,7 @@ jobs:
           fail_on_unmatched_files: true
           body: |
             ## What's Changed
-            **Full Changelog:** [${{ steps.get_previous_tag.outputs.previous_tag }}..${{ github.ref_name }}](https://github.com/${{ github.repository }}/compare/${{ steps.get_previous_tag.outputs.previous_tag }}...${{ github.ref_name }})
+            **Full Changelog:** [${{ steps.get_previous_tag.outputs.tag }}..${{ github.ref_name }}](https://github.com/${{ github.repository }}/compare/${{ steps.get_previous_tag.outputs.previous_tag }}...${{ github.ref_name }})
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
