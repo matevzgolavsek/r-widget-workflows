@@ -8,7 +8,7 @@ const target = 'chrome100,firefox100,safari15'.split(',');
 
 // bundle CSS
 const buildCSS = await esbuild.context({
-  entryPoints: ['./src/css/styles.css'],
+  entryPoints: ['./src/css/widget-styles.css'],
   bundle: true,
   target: target,
   logLevel: productionMode ? 'error' : 'info',
@@ -19,7 +19,7 @@ const buildCSS = await esbuild.context({
 
 // bundle JS
 const buildJS = await esbuild.context({
-  entryPoints: ['./src/index.js'],
+  entryPoints: ['./src/widget.js'],
   bundle: true,
   format: 'iife',
   drop: productionMode ? ['debugger', 'console'] : [], // remove console.log() and debugger; statements on build

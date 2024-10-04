@@ -88,12 +88,16 @@ pnpm lint:fix
 
 ### Deploy (in progress)
 
-Deploy will be handled by Git Release. Need to push tag version in semantic versioning.
+Deploy will be handled by Git Release. Need to push tag version in semantic versioning. With new `tag` push the new release will be triggered.
+
+Merge PRs or push commits to `main` branch and after create a tag release.
 
 ```
+git checkout main
+
+git pull origin main
+
 git tag -a v1.X.X -m 'Version 1.X.X'
 
-git push origin --tags
+git push origin v1.X.X
 ```
-
-After manually create a new release in Github from tag.

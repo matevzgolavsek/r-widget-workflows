@@ -1,7 +1,7 @@
 node_modules/
 dist/
 
-test-suite/index.js
-test-suite/index.js.map
-test-suite/styles.css
-test-suite/styles.css.map
+test-suite/widget.js
+test-suite/widget.js.map
+test-suite/widget-styles.css
+test-suite/widget-styles.css.map

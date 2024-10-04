@@ -2,7 +2,7 @@ export default {
   setupDevStyles() {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = './styles.css';
+    link.href = './widget-styles.css';
     document.head.appendChild(link);
     link.onerror = (error) => {
       console.error('Error loading stylesheet:', error);
