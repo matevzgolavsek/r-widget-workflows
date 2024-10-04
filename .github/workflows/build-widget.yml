@@ -42,23 +42,9 @@ jobs:
       - name: Get previous tag
         id: get_previous_tag
         run: |
-          # List all tags, sort them in reverse version order, and get the second latest
-          echo "Listing all tags..."
-          git ls-remote --tags --ref --sort='version:refname'
-          echo "Listing done."
-
-          # Get the sorted tags and capture the second latest one
           FOUND_TAG=$(git ls-remote --tags --ref --sort='version:refname' | tail -n 2 | head -n 1 | awk -F/ '{print $NF}')
-
-          # Debug output to check if a tag was found
-          if [[ -z "$FOUND_TAG" ]]; then
-            echo "No previous tag found."
-          else
-            echo "Previous tag found: ${FOUND_TAG}"
-          fi
-
-          # Set the previous tag as an output if found
-          echo "previous_tag=$FOUND_TAG" >> $GITHUB_OUTPUT
+          echo "previous_tag=$(echo "${FOUND_TAG}")" >> $GITHUB_OUTPUT
+          [[ -z $(echo "$FOUND_TAG") ]] && echo "No tag found..." || echo "Tag found: ${FOUND_TAG}"
 
       # Step 7: Create a GitHub release
       - name: Create GitHub Release
