@@ -1,4 +1,4 @@
-name: Build Widget123
+name: Build Widget
 on:
   push:
     tags:
@@ -62,7 +62,7 @@ jobs:
 
       # Step 8: Upload the build artifact to the release
       - name: Upload artifact to GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: release/relay-widget-build.zip
         env:
