@@ -64,6 +64,7 @@ jobs:
       - name: Upload artifact to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: release/relay-widget-build.zip
+          name: widget-latest.js
+          files: dist/widget.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
